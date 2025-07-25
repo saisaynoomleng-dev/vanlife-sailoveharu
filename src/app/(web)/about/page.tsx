@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const AboutPage = () => {
   return (
-    <Bounded className="min-h-[86vh]">
+    <Bounded>
       <Image
         width={768}
         height={300}
@@ -13,9 +13,9 @@ const AboutPage = () => {
         alt="a man sitting on the roof of the van looking at the sky full of stars"
       />
 
-      <p className="font-bold text-fs-700 leading-8">
+      <h1 className="font-bold text-fs-700 leading-8">
         Don&apos;t squeeze in a sedan when you could relax in a van.
-      </p>
+      </h1>
 
       <p>
         Our mission is to enliven your road trip with the perfect travel van
