@@ -8,7 +8,9 @@ const Bounded = ({
   as: Comp = 'section',
 }: BoundedProps) => {
   return (
-    <Comp className={clsx('py-3 px-5 space-y-5', className)}>{children}</Comp>
+    <Comp className={clsx('py-3 px-5 space-y-5 min-h-[86vh]', className)}>
+      {children}
+    </Comp>
   );
 };
 

@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <Bounded className="flex flex-col gap-3 home-hero min-h-[86vh] justify-center text-brand-white-100 relative">
+    <Bounded className="flex flex-col gap-3 home-hero justify-center text-brand-white-100 relative">
       <div className="absolute inset-0 z-0 bg-black/50" />
 
-      <p className="text-fs-700 font-semibold relative z-20">
+      <h1 className="text-fs-700 font-semibold relative z-20">
         You got the travel plans, we got the travel vans.
-      </p>
+      </h1>
 
       <p className="relative z-20">
         Add adventure to your life by joining #vanlife movement. Rent the
