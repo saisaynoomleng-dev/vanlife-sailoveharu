@@ -7,7 +7,9 @@ const Bounded = ({
   className,
   as: Comp = 'section',
 }: BoundedProps) => {
-  return <Comp className={(clsx(''), className)}>{children}</Comp>;
+  return (
+    <Comp className={clsx('py-3 px-5 space-y-5', className)}>{children}</Comp>
+  );
 };
 
 export default Bounded;
