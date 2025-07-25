@@ -142,9 +142,14 @@
     @apply scroll-smooth;
   }
   body {
-    @apply leading-normal tracking-normal font-inter bg-brand-white-200 text-brand-black-200 overflow-x-hidden text-fs-400;
+    @apply leading-normal tracking-normal font-inter bg-brand-white-200 text-brand-black-200 overflow-x-hidden text-fs-400 min-h-dvh;
   }
   p {
     @apply text-pretty;
   }
+}
+
+.home-hero {
+  background: url('/home-hero.png') no-repeat center center;
+  background-size: cover;
 }
