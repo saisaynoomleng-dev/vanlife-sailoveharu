@@ -31,10 +31,10 @@ const AboutPage = () => {
       <div className="bg-brand-orange-300 px-3 py-5 flex justify-center flex-col gap-3">
         <p className="font-bold text-fs-500">Your destination is waiting.</p>
         <p className="font-bold text-fs-500">Your van is ready.</p>
-        <Link href="/vans">
+        <Link href="/vans" className="self-start inline-block">
           <Button
             variant="link"
-            className="bg-brand-black-200 text-brand-white-100"
+            className="bg-brand-black-200 text-brand-white-100 "
           >
             Explore our vans
           </Button>

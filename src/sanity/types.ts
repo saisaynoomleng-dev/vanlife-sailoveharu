@@ -13,6 +13,18 @@
  */
 
 // Source: schema.json
+export type Review = {
+  _id: string;
+  _type: 'review';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  author?: string;
+  rating?: number;
+  date?: string;
+  desc?: string;
+};
+
 export type Van = {
   _id: string;
   _type: 'van';
@@ -193,6 +205,7 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | Review
   | Van
   | BlockContent
   | SanityImagePaletteSwatch
@@ -233,6 +246,39 @@ export type VAN_QUERYResult = {
   imageAlt: string | null;
   desc: string | null;
 } | null;
+// Variable: HOST_VANS_QUERY
+// Query: *[_type == 'van' && defined(slug.current)]|order(title asc){  title,  price,  slug,  'imageURL': mainImage.asset->{url},  'imageAlt': mainImage.alt }
+export type HOST_VANS_QUERYResult = Array<{
+  title: string | null;
+  price: number | null;
+  slug: Slug | null;
+  imageURL: {
+    url: string | null;
+  } | null;
+  imageAlt: string | null;
+}>;
+// Variable: HOST_VAN_QUERY
+// Query: *[_type == 'van'    && defined(slug.current)    && slug.current == $slug][0]{  title,  price,  desc,  'imageURL': mainImage.asset->{url},  'imageAlt': mainImage.alt,  slug,  type, }
+export type HOST_VAN_QUERYResult = {
+  title: string | null;
+  price: number | null;
+  desc: string | null;
+  imageURL: {
+    url: string | null;
+  } | null;
+  imageAlt: string | null;
+  slug: Slug | null;
+  type: 'luxury' | 'rugged' | 'simple' | null;
+} | null;
+// Variable: REVIEWS_QUERY
+// Query: *[_type == 'review'  && defined(_id)]|order(date desc){  author,  rating,  date,  desc,  _id }
+export type REVIEWS_QUERYResult = Array<{
+  author: string | null;
+  rating: number | null;
+  date: string | null;
+  desc: string | null;
+  _id: string;
+}>;
 
 // Query TypeMap
 import '@sanity/client';
@@ -240,5 +286,8 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n    *[_type == \'van\' \n  && defined(slug.current)\n  && (\n    (!defined($filter))\n    || $filter == null\n    || type match $filter\n  )] \n  | order(name asc) {\n  title,\n  price,\n  slug,\n  type,\n  "imageURL": mainImage.asset->{url}, \n  "imageAlt": mainImage.alt\n}\n': VANS_QUERYResult;
     '\n    *[_type == \'van\' \n  && slug.current == $slug][0]\n  {\n  title,\n  price,\n  slug,\n  type,\n  "imageURL": mainImage.asset->{url}, \n  "imageAlt": mainImage.alt,\n  desc\n}\n': VAN_QUERYResult;
+    "\n  \n*[_type == 'van'\n && defined(slug.current)]\n|order(title asc)\n{\n  title,\n  price,\n  slug,\n  'imageURL': mainImage.asset->{url},\n  'imageAlt': mainImage.alt\n }": HOST_VANS_QUERYResult;
+    "\n  *[_type == 'van'\n    && defined(slug.current)\n    && slug.current == $slug][0]{\n  title,\n  price,\n  desc,\n  'imageURL': mainImage.asset->{url},\n  'imageAlt': mainImage.alt,\n  slug,\n  type,\n }\n  ": HOST_VAN_QUERYResult;
+    "\n  *[_type == 'review' \n && defined(_id)]\n|order(date desc){\n  author,\n  rating,\n  date,\n  desc,\n  _id\n }": REVIEWS_QUERYResult;
   }
 }
